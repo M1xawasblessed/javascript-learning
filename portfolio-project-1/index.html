@@ -12,6 +12,31 @@
         <p>Find your ideal stay in Spain with transit details.</p>
     </header>
     
+    <!-- Filter Panel -->
+    <section class="filter-panel">
+        <input type="text" id="search-input" placeholder="Search by location or title...">
+        
+        <select id="type-filter">
+            <option value="All">All Types</option>
+            <option value="Co-living">Co-living</option>
+            <option value="Apartment">Apartment</option>
+        </select>
+
+        <select id="zone-filter">
+            <option value="All">All Zones</option>
+            <option value="Zone 1">Zone 1</option>
+            <option value="Zone 2">Zone 2</option>
+            <option value="Zone A">Zone A</option>
+        </select>
+
+        <div class="price-filter">
+            <label for="price-slider">Max Price: €<span id="price-display">1500</span></label>
+            <input type="range" id="price-slider" min="500" max="2000" step="50" value="1500">
+        </div>
+
+        <button id="reset-filters" class="reset-btn">Reset</button>
+    </section>
+
     <!-- JavaScript will inject property cards here -->
     <main id="property-container" class="grid-container"></main>
 

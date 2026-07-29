@@ -46,3 +46,62 @@ header {
 .badge-coliving { background-color: #e67e22; }
 .badge-apartment { background-color: #2980b9; }
 .badge-transit { background-color: #27ae60; }
+/* Filter Panel Styles */
+.filter-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    background-color: white;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1160px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.filter-panel input[type="text"],
+.filter-panel select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    flex: 1;
+    min-width: 150px;
+}
+
+.price-filter {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+}
+
+.price-filter label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.reset-btn {
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.reset-btn:hover {
+    background-color: #c0392b;
+}
+
+.no-results {
+    text-align: center;
+    font-size: 18px;
+    color: #7f8c8d;
+    grid-column: 1 / -1;
+    padding: 40px;
+}
