@@ -34,11 +34,22 @@
             <input type="range" id="price-slider" min="500" max="2000" step="50" value="1500">
         </div>
 
+        <button id="toggle-favorites" class="fav-btn">❤️ Favorites Only</button>
         <button id="reset-filters" class="reset-btn">Reset</button>
     </section>
 
     <!-- JavaScript will inject property cards here -->
     <main id="property-container" class="grid-container"></main>
+
+    <!-- Modal Overlay and Content -->
+    <div id="property-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button id="close-modal" class="close-btn">&times;</button>
+            <div id="modal-body">
+                <!-- Modal details will be injected here via JavaScript -->
+            </div>
+        </div>
+    </div>
 
     <!-- type="module" is crucial for import/export to work -->
     <script type="module" src="app.js"></script>
