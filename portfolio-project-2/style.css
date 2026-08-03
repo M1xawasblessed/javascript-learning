@@ -38,6 +38,15 @@ body {
     background-color: #0065ff;
 }
 
+.secondary-btn {
+    background-color: #dfe1e6;
+    color: #42526e;
+}
+
+.secondary-btn:hover {
+    background-color: #c1c7d0;
+}
+
 .board-container {
     display: flex;
     gap: 20px;
@@ -79,7 +88,6 @@ body {
     gap: 10px;
 }
 
-/* Task Card Styles */
 .task-card {
     background-color: white;
     padding: 15px;
@@ -132,4 +140,64 @@ body {
     color: #de350b;
     font-size: 16px;
     cursor: pointer;
+}
+
+/* Modal Overlay Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(9, 30, 66, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal-card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 8px 16px rgba(9, 30, 66, 0.25);
+}
+
+.modal-card h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #5e6c84;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #dfe1e6;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
 }
