@@ -1,31 +1,10 @@
-// Initial Data State
 const defaultTasks = [
-    {
-        id: "1",
-        title: "Setup Repository",
-        description: "Initialize git repository and setup project folders.",
-        status: "done",
-        priority: "high"
-    },
-    {
-        id: "2",
-        title: "Design Database Schema",
-        description: "Draft data models for tasks and categories.",
-        status: "in-progress",
-        priority: "medium"
-    },
-    {
-        id: "3",
-        title: "Implement Drag and Drop",
-        description: "Add HTML5 drag and drop API listeners.",
-        status: "todo",
-        priority: "high"
-    }
+    { id: "1", title: "Setup Repository", description: "Initialize git repository.", status: "done", priority: "high" },
+    { id: "2", title: "Design Schema", description: "Draft data models.", status: "in-progress", priority: "medium" }
 ];
 
 let tasks = JSON.parse(localStorage.getItem("kanban_tasks")) || defaultTasks;
 
-// DOM Elements
 const todoList = document.getElementById("todo-list");
 const inProgressList = document.getElementById("in-progress-list");
 const doneList = document.getElementById("done-list");
@@ -34,12 +13,16 @@ const todoCount = document.getElementById("todo-count");
 const inProgressCount = document.getElementById("in-progress-count");
 const doneCount = document.getElementById("done-count");
 
+const modal = document.getElementById("task-modal");
+const addTaskBtn = document.getElementById("add-task-btn");
+const cancelBtn = document.getElementById("cancel-btn");
+const taskForm = document.getElementById("task-form");
+
 function saveTasks() {
     localStorage.setItem("kanban_tasks", JSON.stringify(tasks));
 }
 
 function renderBoard() {
-    // Clear lists
     todoList.innerHTML = "";
     inProgressList.innerHTML = "";
     doneList.innerHTML = "";
@@ -72,5 +55,31 @@ function renderBoard() {
     inProgressCount.textContent = counts["in-progress"];
     doneCount.textContent = counts.done;
 }
+
+// Modal Handlers
+addTaskBtn.addEventListener("click", () => modal.classList.remove("hidden"));
+cancelBtn.addEventListener("click", () => modal.classList.add("hidden"));
+
+taskForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const title = document.getElementById("task-title").value;
+    const description = document.getElementById("task-desc").value;
+    const priority = document.getElementById("task-priority").value;
+
+    const newTask = {
+        id: Date.now().toString(),
+        title,
+        description,
+        status: "todo",
+        priority
+    };
+
+    tasks.push(newTask);
+    saveTasks();
+    renderBoard();
+
+    taskForm.reset();
+    modal.classList.add("hidden");
+});
 
 renderBoard();
