@@ -16,7 +16,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 40px;
-    background-color: #0052cc;
+    background-color: #0747a6;
     color: white;
 }
 
@@ -30,10 +30,51 @@ body {
 }
 
 .primary-btn {
-    background-color: #0065ff;
+    background-color: #0052cc;
     color: white;
 }
 
 .primary-btn:hover {
-    background-color: #0052cc;
+    background-color: #0065ff;
+}
+
+.board-container {
+    display: flex;
+    gap: 20px;
+    padding: 30px 40px;
+    align-items: flex-start;
+    overflow-x: auto;
+}
+
+.column {
+    background-color: #ebecf0;
+    border-radius: 8px;
+    width: 320px;
+    min-width: 320px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+.column-title {
+    font-size: 16px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #5e6c84;
+}
+
+.task-count {
+    background-color: #dfe1e6;
+    color: #172b4d;
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 12px;
+}
+
+.task-list {
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
