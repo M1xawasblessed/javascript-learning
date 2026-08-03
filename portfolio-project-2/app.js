@@ -18,6 +18,8 @@ const addTaskBtn = document.getElementById("add-task-btn");
 const cancelBtn = document.getElementById("cancel-btn");
 const taskForm = document.getElementById("task-form");
 
+let draggedTaskId = null;
+
 function saveTasks() {
     localStorage.setItem("kanban_tasks", JSON.stringify(tasks));
 }
@@ -52,6 +54,16 @@ function renderBoard() {
             </div>
         `;
 
+        card.addEventListener("dragstart", () => {
+            draggedTaskId = task.id;
+            card.classList.add("dragging");
+        });
+
+        card.addEventListener("dragend", () => {
+            card.classList.remove("dragging");
+            draggedTaskId = null;
+        });
+
         const deleteBtn = card.querySelector(".delete-btn");
         deleteBtn.addEventListener("click", () => deleteTask(task.id));
 
@@ -64,6 +76,27 @@ function renderBoard() {
     inProgressCount.textContent = counts["in-progress"];
     doneCount.textContent = counts.done;
 }
+
+// Drag & Drop Column Listeners
+document.querySelectorAll(".column").forEach(column => {
+    column.addEventListener("dragover", (e) => {
+        e.preventDefault();
+    });
+
+    column.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const newStatus = column.getAttribute("data-status");
+        
+        if (draggedTaskId && newStatus) {
+            const task = tasks.find(t => t.id === draggedTaskId);
+            if (task) {
+                task.status = newStatus;
+                saveTasks();
+                renderBoard();
+            }
+        }
+    });
+});
 
 addTaskBtn.addEventListener("click", () => modal.classList.remove("hidden"));
 cancelBtn.addEventListener("click", () => modal.classList.add("hidden"));
