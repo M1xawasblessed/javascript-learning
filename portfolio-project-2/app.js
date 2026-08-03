@@ -22,6 +22,12 @@ function saveTasks() {
     localStorage.setItem("kanban_tasks", JSON.stringify(tasks));
 }
 
+function deleteTask(id) {
+    tasks = tasks.filter(task => task.id !== id);
+    saveTasks();
+    renderBoard();
+}
+
 function renderBoard() {
     todoList.innerHTML = "";
     inProgressList.innerHTML = "";
@@ -46,6 +52,9 @@ function renderBoard() {
             </div>
         `;
 
+        const deleteBtn = card.querySelector(".delete-btn");
+        deleteBtn.addEventListener("click", () => deleteTask(task.id));
+
         if (task.status === "todo") todoList.appendChild(card);
         else if (task.status === "in-progress") inProgressList.appendChild(card);
         else if (task.status === "done") doneList.appendChild(card);
@@ -56,7 +65,6 @@ function renderBoard() {
     doneCount.textContent = counts.done;
 }
 
-// Modal Handlers
 addTaskBtn.addEventListener("click", () => modal.classList.remove("hidden"));
 cancelBtn.addEventListener("click", () => modal.classList.add("hidden"));
 
