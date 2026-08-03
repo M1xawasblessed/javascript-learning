@@ -13,7 +13,20 @@
     </header>
 
     <main class="board-container">
-        <!-- Columns will be added here -->
+        <div class="column" id="todo" data-status="todo">
+            <h2 class="column-title">To Do <span class="task-count" id="todo-count">0</span></h2>
+            <div class="task-list" id="todo-list"></div>
+        </div>
+
+        <div class="column" id="in-progress" data-status="in-progress">
+            <h2 class="column-title">In Progress <span class="task-count" id="in-progress-count">0</span></h2>
+            <div class="task-list" id="in-progress-list"></div>
+        </div>
+
+        <div class="column" id="done" data-status="done">
+            <h2 class="column-title">Done <span class="task-count" id="done-count">0</span></h2>
+            <div class="task-list" id="done-list"></div>
+        </div>
     </main>
 
     <script src="app.js"></script>
