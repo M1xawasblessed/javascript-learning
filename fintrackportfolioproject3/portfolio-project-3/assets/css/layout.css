@@ -1,0 +1,224 @@
+/* App shell: a fixed sidebar beside a scrolling main column, collapsing to a top bar. */
+
+.app {
+    display: grid;
+    grid-template-columns: 248px 1fr;
+    min-height: 100vh;
+}
+
+/* The sidebar is sticky and one viewport tall; this paints its column for the rest
+   of a long page so the rail doesn't stop halfway down. */
+@media (min-width: 901px) {
+    .app {
+        background: linear-gradient(to right, var(--surface-1) 0 248px, transparent 248px);
+    }
+}
+
+/* ---------- Sidebar ---------- */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-5) var(--space-4);
+    background: var(--surface-1);
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 0 var(--space-2);
+}
+
+.brand__mark {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background: var(--accent);
+    color: var(--accent-ink);
+    flex: none;
+}
+
+.brand__name {
+    font-size: 17px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+}
+
+.brand__tagline {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.nav__link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background var(--transition), color var(--transition);
+}
+
+.nav__link:hover {
+    background: var(--surface-2);
+    color: var(--text-primary);
+}
+
+.nav__link[aria-current="page"] {
+    background: var(--surface-2);
+    color: var(--text-primary);
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.sidebar__footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: 0 var(--space-2);
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* ---------- Main column ---------- */
+
+.main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-6);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-page);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.topbar__titles h1 {
+    font-size: 22px;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+}
+
+/* The heading is focused on navigation so screen readers land in the new section.
+   It is not an interactive control, so it does not draw a focus ring. */
+.topbar__titles h1:focus {
+    outline: none;
+}
+
+.topbar__titles p {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.topbar__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.view {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    flex: 1;
+}
+
+/* ---------- Grids ---------- */
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-4);
+}
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-4);
+}
+
+.budget-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-4);
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-4);
+    align-items: start;
+}
+
+@media (max-width: 1100px) {
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .app {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-4);
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+        overflow-x: auto;
+    }
+
+    .nav {
+        flex-direction: row;
+    }
+
+    .nav__link[aria-current="page"] {
+        box-shadow: inset 0 -3px 0 var(--accent);
+    }
+
+    .brand__tagline,
+    .sidebar__footer {
+        display: none;
+    }
+
+    .topbar,
+    .view {
+        padding: var(--space-4);
+    }
+
+    .topbar {
+        flex-wrap: wrap;
+    }
+}

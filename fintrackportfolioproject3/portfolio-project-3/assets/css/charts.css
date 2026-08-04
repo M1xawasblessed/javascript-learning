@@ -1,0 +1,196 @@
+/*
+ * Chart chrome: figure, canvas, legend, tooltip and the data-table fallback.
+ *
+ * The canvas carries the marks; identity and values live in HTML around it. That is
+ * deliberate — a legend row and a `<details>` table are readable by a screen reader
+ * and survive a colour-vision difference, which pixels on a canvas do not.
+ */
+
+.chart {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-width: 0;
+}
+
+.chart__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+.chart__title {
+    font-size: 15px;
+    font-weight: 620;
+}
+
+.chart__subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.chart__canvas-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.chart__canvas {
+    display: block;
+    width: 100%;
+    touch-action: pan-y;
+}
+
+/* ---------- Tooltip ---------- */
+
+.chart__tooltip {
+    position: absolute;
+    z-index: 5;
+    min-width: 120px;
+    padding: var(--space-2) var(--space-3);
+    background: var(--surface-1);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    font-size: 13px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -100%);
+    transition: opacity var(--transition);
+}
+
+.chart__tooltip[data-visible="true"] {
+    opacity: 1;
+}
+
+.chart__tooltip-title {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.chart__tooltip-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    justify-content: space-between;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+}
+
+.chart__tooltip-key {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.chart__tooltip-value {
+    color: var(--text-primary);
+    font-weight: 560;
+}
+
+/* ---------- Legend ---------- */
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+}
+
+.legend--stack {
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.legend__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text-secondary);
+    min-width: 0;
+}
+
+.legend__swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    background: var(--series-0);
+    flex: none;
+}
+
+.legend__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.legend__value {
+    margin-left: auto;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+    font-weight: 550;
+}
+
+.legend__share {
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    min-width: 44px;
+    text-align: right;
+}
+
+/* ---------- Data table fallback ---------- */
+
+.chart__data {
+    font-size: 13px;
+}
+
+.chart__data summary {
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: var(--space-1) 0;
+}
+
+.chart__data summary:hover {
+    color: var(--text-primary);
+}
+
+.chart__data table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--space-2);
+}
+
+.chart__data th,
+.chart__data td {
+    padding: 6px var(--space-2);
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+}
+
+.chart__data td:not(:first-child),
+.chart__data th:not(:first-child) {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Donut: ring beside its legend ---------- */
+
+@media (min-width: 640px) {
+    .chart.donut {
+        display: grid;
+        grid-template-columns: minmax(180px, 240px) 1fr;
+        column-gap: var(--space-5);
+        align-items: center;
+    }
+
+    /* The caption and the data table span both columns; only the ring and the
+       legend share the row. */
+    .chart.donut > figcaption,
+    .chart.donut > .chart__data {
+        grid-column: 1 / -1;
+    }
+}

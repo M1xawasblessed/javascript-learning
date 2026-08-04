@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FinTrack - a personal finance dashboard built with vanilla JavaScript: reactive store, hash router, canvas charts and versioned local storage.">
+    <meta name="color-scheme" content="light dark">
+    <title>FinTrack · Personal Finance Dashboard</title>
+
+    <link rel="stylesheet" href="assets/css/tokens.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/charts.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><text y='20' font-size='20'>💸</text></svg>">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="brand__mark" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <path d="M3 9h16"></path>
+                        <path d="M16 13h3"></path>
+                    </svg>
+                </span>
+                <span>
+                    <span class="brand__name">FinTrack</span>
+                    <span class="brand__tagline">Personal finance</span>
+                </span>
+            </div>
+
+            <nav class="nav" id="nav" aria-label="Sections"></nav>
+
+            <div class="sidebar__footer">
+                <p>Vanilla JS · no dependencies</p>
+                <p>Data stays in this browser.</p>
+            </div>
+        </aside>
+
+        <div class="main">
+            <header class="topbar">
+                <div class="topbar__titles">
+                    <h1 id="view-title" tabindex="-1">Overview</h1>
+                    <p id="view-subtitle"></p>
+                </div>
+                <div class="topbar__actions" id="topbar-actions"></div>
+            </header>
+
+            <main id="main-content"></main>
+        </div>
+    </div>
+
+    <div id="modal-root"></div>
+    <div id="toast-region" class="toast-region" role="status" aria-live="polite"></div>
+
+    <noscript>
+        <p style="padding: 24px">FinTrack is a client-side application and needs JavaScript enabled.</p>
+    </noscript>
+
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>
